@@ -1,5 +1,6 @@
 from django.urls import path
+from .views import scrape_site
 
 urlpatterns = [
-  path()
+  path('scrape/',scrape_site,name='scrape_site'),
 ]
