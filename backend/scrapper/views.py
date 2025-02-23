@@ -26,6 +26,7 @@
 #   except Exception as e:
 #     return Response({'error': str(e)},status=500)
 
+import logging
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -33,12 +34,15 @@ from .models import ScrappedModel
 from .serializers import ScrapeSerializer, ScrapeRequestSerializer
 from .scrapper_logic import WebScraper
 
+logger = logging.getLogger(__name__)
+
 class ScrapeSiteView(APIView):
     def post(self, request):
         serializer = ScrapeRequestSerializer(data=request.data)
         if serializer.is_valid():
             url = serializer.validated_data['url']
             try:
+                # Scrape content
                 scraped_content = WebScraper.scrape(url)
 
                 # Save to database (optional)
@@ -47,5 +51,6 @@ class ScrapeSiteView(APIView):
                 
                 return Response({'data': response_serializer.data}, status=status.HTTP_200_OK)
             except Exception as e:
+                logger.error(f"Scraping failed: {str(e)}")
                 return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
