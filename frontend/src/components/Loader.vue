@@ -1,17 +1,12 @@
 <template>
-  <div class="loader">Loading...</div>
+  <div class="flex justify-center items-center">
+    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16"></div>
+  </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'Loader'
-})
-</script>
 
 <style scoped>
 .loader {
+  border-top-color: #3498db;
   animation: spin 1s linear infinite;
 }
 @keyframes spin {
