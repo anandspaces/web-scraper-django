@@ -1,28 +1,26 @@
 <template>
   <DefaultLayout>
-    <div class="container mx-auto p-4">
-      <div class="bg-white shadow rounded-lg p-6">
-        <h1 class="text-3xl font-bold mb-6 text-gray-800">Web Scraper</h1>
-        
-        <input 
-          v-model="url" 
-          type="text" 
-          placeholder="Enter website URL" 
-          class="border rounded w-full p-3 mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        
-        <button 
-          @click="scrapeSite"
-          :disabled="loading"
-          class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50"
-        >Scrape</button>
-        
-        <Loader v-if="loading" />
+    <div class="bg-white shadow rounded-lg p-6">
+      <h1 class="text-3xl font-bold mb-6 text-gray-800">Web Scraper</h1>
+      
+      <input 
+        v-model="url" 
+        type="text" 
+        placeholder="Enter website URL" 
+        class="border border-gray-300 rounded w-full p-3 mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      
+      <button 
+        @click="scrapeSite"
+        :disabled="loading"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50"
+      >Scrape</button>
+      
+      <Loader v-if="loading" />
 
-        <div v-if="data" class="mt-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Scraped Data:</h2>
-          <pre class="bg-gray-100 p-4 rounded overflow-auto">{{ data }}</pre>
-        </div>
+      <div v-if="data" class="mt-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Scraped Data:</h2>
+        <pre class="bg-gray-100 p-4 rounded overflow-auto text-sm">{{ data }}</pre>
       </div>
     </div>
   </DefaultLayout>
