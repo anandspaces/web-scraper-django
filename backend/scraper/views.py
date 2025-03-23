@@ -30,7 +30,7 @@ import logging
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import scrapedModel
+from .models import ScrapedModel
 from .serializers import ScrapeSerializer, ScrapeRequestSerializer
 from .scraper_logic import WebScraper
 
@@ -42,13 +42,9 @@ class ScrapeSiteView(APIView):
         if serializer.is_valid():
             url = serializer.validated_data['url']
             try:
-                # Scrape content
                 scraped_content = WebScraper.scrape(url)
-
-                # Save to database (optional)
-                scraped_data = scrapedModel.objects.create(url=url, content=scraped_content)
+                scraped_data = ScrapedModel.objects.create(url=url, content=scraped_content)
                 response_serializer = ScrapeSerializer(scraped_data)
-                
                 return Response({'data': response_serializer.data}, status=status.HTTP_200_OK)
             except Exception as e:
                 logger.error(f"Scraping failed: {str(e)}")
