@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import ScrappedModel
+from .models import ScrapedModel
 
 class ScrapeSerializer(serializers.ModelSerializer):
   class Meta:
-    model = ScrappedModel
+    model = ScrapedModel
     fields = '__all__'
 
 class ScrapeRequestSerializer(serializers.Serializer):

@@ -1,7 +1,7 @@
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
-# from .models import ScrappedModel
-# from .serializers import ScrappedSerializer
+# from .models import scrapedModel
+# from .serializers import scrapedSerializer
 # import requests
 # from bs4 import BeautifulSoup
 
@@ -18,8 +18,8 @@
 #     text = soup.get_text()
 
 #     # Save to database
-#     scrapped_data = ScrappedModel.objects.create(url=url,content=text)
-#     serializer = ScrappedSerializer(scrapped_data)
+#     scraped_data = scrapedModel.objects.create(url=url,content=text)
+#     serializer = scrapedSerializer(scraped_data)
 
 #     return Response({'data': serializer.data})
   
@@ -30,9 +30,9 @@ import logging
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import ScrappedModel
+from .models import scrapedModel
 from .serializers import ScrapeSerializer, ScrapeRequestSerializer
-from .scrapper_logic import WebScraper
+from .scraper_logic import WebScraper
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +46,7 @@ class ScrapeSiteView(APIView):
                 scraped_content = WebScraper.scrape(url)
 
                 # Save to database (optional)
-                scraped_data = ScrappedModel.objects.create(url=url, content=scraped_content)
+                scraped_data = scrapedModel.objects.create(url=url, content=scraped_content)
                 response_serializer = ScrapeSerializer(scraped_data)
                 
                 return Response({'data': response_serializer.data}, status=status.HTTP_200_OK)

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'scrapper.apps.ScrapperConfig', # new
+    'scraper.apps.scraperConfig', # new
     'rest_framework', # new
     'corsheaders', # new
 ]
